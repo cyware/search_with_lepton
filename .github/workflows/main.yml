@@ -34,6 +34,14 @@ jobs:
         fetch-depth: 0
         # Checkout pull request HEAD commit instead of merge commit
         ref: ${{ github.event.pull_request.head.sha }}
+    
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 18
+        cache: npm
+    - run: npm install
+    - name: Build
+      run: npm run docs:build
     - name: Install dependencies
       run: |
           pip install -U leptonai && lep login
